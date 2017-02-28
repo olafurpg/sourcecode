@@ -1,3 +1,4 @@
+import sbtcrossproject.{crossProject, CrossType}
 
 crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
 
@@ -12,8 +13,8 @@ def macroDependencies(version: String) =
     else
       Seq())
 
-lazy val sourcecode = crossProject.settings(
-  version := "0.1.3",
+lazy val sourcecode = crossProject(JSPlatform, JVMPlatform, NativePlatform).settings(
+  version := "0.1.3-native",
   scalaVersion := "2.11.8",
   name := "sourcecode"  ,
   organization := "com.lihaoyi",
@@ -49,5 +50,6 @@ lazy val sourcecode = crossProject.settings(
     </developers>
 )
 
+lazy val native = sourcecode.native
 lazy val js = sourcecode.js
 lazy val jvm = sourcecode.jvm
